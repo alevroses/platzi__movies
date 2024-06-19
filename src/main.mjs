@@ -17,6 +17,7 @@ import { createCategories } from "./utils/create-categories.mjs";
 import { getSearch } from "./API/get-search.mjs";
 import { getMovieById } from "./API/get-movie-by-id.mjs";
 import { getSimilar } from "./API/get-similar.mjs";
+import { getPagination } from "./API/get-pagination.mjs";
 
 window.onbeforeunload = () => {
   scrollTo(0, 0);
@@ -27,7 +28,7 @@ const showTrendingMovies = async () => {
 
   preview.innerHTML = "";
 
-  createMovies(data, preview);
+  createMovies(data, preview, true);
 };
 
 const showCategories = async () => {
@@ -38,16 +39,16 @@ const showCategories = async () => {
   createCategories(data, previewCat);
 };
 
-const showByCategory = async id => {
+const showByCategory = async (id) => {
   const data = await getByCategory(id);
   //console.log(data);
 
   genericSection.innerHTML = "";
 
-  createMovies(data, genericSection);
+  createMovies(data, genericSection, true);
 };
 
-const showSearch = async query => {
+const showSearch = async (query) => {
   const data = await getSearch(query);
   console.log("Show search: ", data);
 
@@ -57,10 +58,36 @@ const showSearch = async query => {
 const showTrending = async () => {
   const data = await getTrendingMovies();
 
-  createMovies(data, genericSection);
+  createMovies(data, genericSection, {
+    lazyLoad: true,
+    clean: true,
+  });
+
+  // Loading Button
+  const btnLoadMore = document.createElement("button");
+  btnLoadMore.innerText = "Loading more";
+  genericSection.append(btnLoadMore);
+
+  let page = 1;
+
+  btnLoadMore.addEventListener("click", async () => {
+    page++;
+
+    const data = await getPagination(page);
+
+    createMovies(data, genericSection, {
+      lazyLoad: true,
+      clean: false,
+    });
+
+    // Loading Button
+    // const btnLoadMore = document.createElement("button");
+    btnLoadMore.innerText = "Loading more";
+    genericSection.append(btnLoadMore);
+  });
 };
 
-const showMovieById = async id => {
+const showMovieById = async (id) => {
   const data = await getMovieById(id);
 
   const movieImgUrl = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
@@ -75,15 +102,14 @@ const showMovieById = async id => {
   `;
 
   movieDetailTitle.textContent = data.title;
-  movieDetailDescription.textContent =
-    data.overview;
+  movieDetailDescription.textContent = data.overview;
   movieDetailScore.textContent = data.vote_average;
 
   createCategories(data, movieDetailCategoriesList);
   showSimilar(id);
 };
 
-const showSimilar = async id => {
+const showSimilar = async (id) => {
   const data = await getSimilar(id);
 
   createMovies(data, relatedMoviesContainer);

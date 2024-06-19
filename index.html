@@ -2,66 +2,67 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      http-equiv="X-UA-Compatible"
-      content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0" />
+      content="width=device-width, initial-scale=1.0"
+    />
 
     <link
       rel="preconnect"
-      href="https://fonts.googleapis.com" />
+      href="https://fonts.googleapis.com"
+    />
     <link
       rel="preconnect"
       href="https://fonts.gstatic.com"
-      crossorigin />
+      crossorigin
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Dosis:wght@700;800&family=Red+Hat+Display:wght@400;500&display=swap"
-      rel="stylesheet" />
-    <link
       rel="stylesheet"
-      href="./styles/app.css" />
+    />
+    <link rel="stylesheet" href="./styles/app.css" />
 
     <title>PlatziMovies</title>
   </head>
   <body>
     <header id="header" class="header-container">
-      <span class="header-arrow inactive"
-        >&lt;</span
-      >
+      <span class="header-arrow inactive">&lt;</span>
       <h1 class="header-title">PlatziMovies</h1>
       <h1
-        class="header-title header-title--categoryView inactive">
+        class="header-title header-title--categoryView inactive"
+      >
         Acción
       </h1>
 
-      <form
-        id="searchForm"
-        class="header-searchForm">
-        <input
-          type="text"
-          placeholder="Vengadores" />
+      <form id="searchForm" class="header-searchForm">
+        <input type="text" placeholder="Vengadores" />
         <button id="searchBtn">🔍</button>
       </form>
     </header>
 
     <section
       id="trendingPreview"
-      class="trendingPreview-container">
+      class="trendingPreview-container"
+    >
       <div class="trendingPreview-header">
-        <h2 class="trendingPreview-title">
-          Tendencias
-        </h2>
-        <button class="trendingPreview-btn">
-          Ver más
-        </button>
+        <h2 class="trendingPreview-title">Tendencias</h2>
+        <button class="trendingPreview-btn">Ver más</button>
       </div>
 
       <article class="trendingPreview-movieList">
-        <!-- <div class="movie-container">
+        <div
+          class="movie-container movie-container--loading"
+        ></div>
+        <div
+          class="movie-container movie-container--loading"
+        ></div>
+        <div
+          class="movie-container movie-container--loading"
+        ></div>
+        <!-- <div class="movie-container movie-container--loading">
           <img
-            src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
+            data-src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
             class="movie-img"
             alt="Nombre de la película" />
         </div> -->
@@ -70,14 +71,22 @@
 
     <section
       id="categoriesPreview"
-      class="categoriesPreview-container">
-      <h2 class="categoriesPreview-title">
-        Categorías
-      </h2>
+      class="categoriesPreview-container"
+    >
+      <h2 class="categoriesPreview-title">Categorías</h2>
 
       <article class="categoriesPreview-list">
+        <div
+          class="category-container category-container--loading"
+        ></div>
+        <div
+          class="category-container category-container--loading"
+        ></div>
+        <div
+          class="category-container category-container--loading"
+        ></div>
         <!-- 
-        <div class="category-container">
+        <div class="category-container category-container--loading">
           <h3 id="id28" class="category-title">
             Romance
           </h3>
@@ -88,57 +97,65 @@
 
     <section
       id="genericList"
-      class="genericList-container inactive">
-      <div class="movie-container">
+      class="genericList-container inactive"
+    >
+      <div
+        class="movie-container movie-container--loading"
+      ></div>
+      <div
+        class="movie-container movie-container--loading"
+      ></div>
+      <div
+        class="movie-container movie-container--loading"
+      ></div>
+      <!-- <div class="movie-container">
         <img
           src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
           class="movie-img"
-          alt="Nombre de la película" />
+          alt="Nombre de la película"
+        />
       </div>
 
       <div class="movie-container">
         <img
           src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
           class="movie-img"
-          alt="Nombre de la película" />
+          alt="Nombre de la película"
+        />
       </div>
 
       <div class="movie-container">
         <img
           src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
           class="movie-img"
-          alt="Nombre de la película" />
-      </div>
+          alt="Nombre de la película"
+        />
+      </div> -->
     </section>
 
     <section
       id="movieDetail"
-      class="movieDetail-container inactive">
+      class="movieDetail-container inactive"
+    >
       <h1 class="movieDetail-title">Deadpool</h1>
       <span class="movieDetail-score">7.6</span>
       <p class="movieDetail-description">
-        Wisecracking mercenary Deadpool battles the
-        evil and powerful Cable and other bad guys
-        to save a boy's life.
+        Wisecracking mercenary Deadpool battles the evil and
+        powerful Cable and other bad guys to save a boy's
+        life.
       </p>
 
       <article class="categories-list">
         <div class="category-container">
-          <h3 id="id28" class="category-title">
-            Romance
-          </h3>
+          <h3 id="id28" class="category-title">Romance</h3>
         </div>
 
         <div class="category-container">
-          <h3 id="id16" class="category-title">
-            Drama
-          </h3>
+          <h3 id="id16" class="category-title">Drama</h3>
         </div>
 
         <div class="category-container">
-          <h3 id="id14" class="category-title">
-            Acción
-          </h3>
+          <h3 id="id14" class="category-title">Acción</h3>
         </div>
       </article>
 
@@ -148,33 +165,43 @@
         </h2>
 
         <div class="relatedMovies-scrollContainer">
-          <div class="movie-container">
+          <div
+            class="movie-container movie-container--loading"
+          ></div>
+          <div
+            class="movie-container movie-container--loading"
+          ></div>
+          <div
+            class="movie-container movie-container--loading"
+          ></div>
+          <!-- <div class="movie-container">
             <img
               src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
               class="movie-img"
-              alt="Nombre de la película" />
+              alt="Nombre de la película"
+            />
           </div>
 
           <div class="movie-container">
             <img
               src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
               class="movie-img"
-              alt="Nombre de la película" />
+              alt="Nombre de la película"
+            />
           </div>
 
           <div class="movie-container">
             <img
               src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
               class="movie-img"
-              alt="Nombre de la película" />
-          </div>
+              alt="Nombre de la película"
+            />
+          </div> -->
         </div>
       </article>
     </section>
 
-    <footer>
-      Hecho con amor en Platzi por @juandc
-    </footer>
+    <footer>Hecho con amor en Platzi por @juandc</footer>
 
     <!-- <script src="./src/secrets.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
@@ -183,6 +210,7 @@
       src="./src/main.mjs"></script> -->
     <script
       type="module"
-      src="./src/navigation.mjs"></script>
+      src="./src/navigation.mjs"
+    ></script>
   </body>
 </html>
