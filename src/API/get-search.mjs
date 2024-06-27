@@ -1,10 +1,11 @@
 import { authorization } from "../parameters.mjs";
 
 const query = ["?", "query="].join("");
+const page = ["&", "page="].join("");
 
-const getSearch = async name => {
+const getSearch = async (name, pageNumber = 1) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/search/movie${query}${name}`,
+    `https://api.themoviedb.org/3/search/movie${query}${name}${page}${pageNumber}`,
     {
       method: "GET",
       headers: {

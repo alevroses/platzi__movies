@@ -1,6 +1,9 @@
 import { getByCategory } from "./API/get-by-category.mjs";
 import { getSearch } from "./API/get-search.mjs";
 import {
+  paginationData,
+  paginationDataCategory,
+  paginationDataSearch,
   showByCategory,
   showCategories,
   showMovieById,
@@ -23,8 +26,18 @@ import {
   trendingPreviewSection,
 } from "./nodes.mjs";
 
+let page = 1;
+let infiniteScroll;
+
 const navigator = () => {
   console.log({ location });
+
+  if (infiniteScroll) {
+    window.removeEventListener("scroll", infiniteScroll, {
+      passive: false,
+    });
+    infiniteScroll = undefined;
+  }
 
   if (location.hash.startsWith("#trends")) {
     trendsPage();
@@ -32,9 +45,7 @@ const navigator = () => {
     searchPage();
   } else if (location.hash.startsWith("#movie=")) {
     moviesPage();
-  } else if (
-    location.hash.startsWith("#category=")
-  ) {
+  } else if (location.hash.startsWith("#category=")) {
     categoriesPage();
   } else {
     homePage();
@@ -42,6 +53,12 @@ const navigator = () => {
 
   /* document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0; */
+
+  if (infiniteScroll) {
+    window.addEventListener("scroll", infiniteScroll, {
+      passive: false,
+    });
+  }
 };
 
 /* searchFormBtn.addEventListener("click", () => {
@@ -54,7 +71,7 @@ const navigator = () => {
     searchFormInput.value.split(" ").join(" ");
 }); */
 
-searchFormBtn.addEventListener("click", e => {
+searchFormBtn.addEventListener("click", (e) => {
   if (searchFormInput.value.length > 0) {
     location.hash = `#search=${searchFormInput.value}`;
   }
@@ -86,11 +103,8 @@ arrowBtn.addEventListener("click", () => {
 }; */
 
 window.addEventListener("load", navigator, false);
-window.addEventListener(
-  "hashchange",
-  navigator,
-  false
-);
+window.addEventListener("hashchange", navigator, false);
+window.addEventListener("scroll", infiniteScroll, false);
 
 // DOMContentLoaded
 // load
@@ -98,9 +112,7 @@ window.addEventListener(
 const homePage = () => {
   console.log("Home!!!");
 
-  headerSection.classList.remove(
-    "header-container--long"
-  );
+  headerSection.classList.remove("header-container--long");
   headerSection.style.background = "";
   arrowBtn.classList.add("inactive");
   arrowBtn.classList.remove("header-arrow--white");
@@ -108,12 +120,8 @@ const homePage = () => {
   headerCategoryTitle.classList.add("inactive");
   searchForm.classList.remove("inactive");
 
-  trendingPreviewSection.classList.remove(
-    "inactive"
-  );
-  categoriesPreviewSection.classList.remove(
-    "inactive"
-  );
+  trendingPreviewSection.classList.remove("inactive");
+  categoriesPreviewSection.classList.remove("inactive");
   genericSection.classList.add("inactive");
   movieDetailSection.classList.add("inactive");
 
@@ -130,9 +138,7 @@ const categoriesPage = () => {
 
   window.scrollTo(0, 0);
 
-  headerSection.classList.remove(
-    "header-container--long"
-  );
+  headerSection.classList.remove("header-container--long");
   headerSection.style.background = "";
   arrowBtn.classList.remove("inactive");
   arrowBtn.classList.remove("header-arrow--white");
@@ -141,29 +147,25 @@ const categoriesPage = () => {
   searchForm.classList.add("inactive");
 
   trendingPreviewSection.classList.add("inactive");
-  categoriesPreviewSection.classList.add(
-    "inactive"
-  );
+  categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
 
   // ['#category', 'id-name']
-  const [_, categoryData] =
-    location.hash.split("=");
+  const [_, categoryData] = location.hash.split("=");
   const [categoryId, categoryName] =
     categoryData.split("-");
 
   headerCategoryTitle.innerHTML = categoryName;
 
   showByCategory(categoryId);
+  infiniteScroll = paginationDataCategory(categoryId);
 };
 
 const moviesPage = () => {
   console.log("Movie!!!");
 
-  headerSection.classList.add(
-    "header-container--long"
-  );
+  headerSection.classList.add("header-container--long");
   // headerSection.style.background = '';
   arrowBtn.classList.remove("inactive");
   arrowBtn.classList.add("header-arrow--white");
@@ -172,9 +174,7 @@ const moviesPage = () => {
   searchForm.classList.add("inactive");
 
   trendingPreviewSection.classList.add("inactive");
-  categoriesPreviewSection.classList.add(
-    "inactive"
-  );
+  categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.add("inactive");
   movieDetailSection.classList.remove("inactive");
 
@@ -186,9 +186,7 @@ const moviesPage = () => {
 const searchPage = () => {
   console.log("Search!!!");
 
-  headerSection.classList.remove(
-    "header-container--long"
-  );
+  headerSection.classList.remove("header-container--long");
   headerSection.style.background = "";
   arrowBtn.classList.remove("inactive");
   arrowBtn.classList.remove("header-arrow--white");
@@ -197,9 +195,7 @@ const searchPage = () => {
   searchForm.classList.remove("inactive");
 
   trendingPreviewSection.classList.add("inactive");
-  categoriesPreviewSection.classList.add(
-    "inactive"
-  );
+  categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
 
@@ -211,14 +207,14 @@ const searchPage = () => {
   const [x] = query.match(/[A-Za-z]+/g);
   console.log(x);
   showSearch(x);
+
+  infiniteScroll = paginationDataSearch(x);
 };
 
 const trendsPage = () => {
   console.log("Trends!!");
 
-  headerSection.classList.remove(
-    "header-container--long"
-  );
+  headerSection.classList.remove("header-container--long");
   headerSection.style.background = "";
   arrowBtn.classList.remove("inactive");
   arrowBtn.classList.remove("header-arrow--white");
@@ -227,15 +223,14 @@ const trendsPage = () => {
   searchForm.classList.add("inactive");
 
   trendingPreviewSection.classList.add("inactive");
-  categoriesPreviewSection.classList.add(
-    "inactive"
-  );
+  categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
 
   headerCategoryTitle.innerHTML = "Trends";
 
   showTrending();
+  infiniteScroll = paginationData;
 };
 
-export { navigator };
+export { navigator, page };
