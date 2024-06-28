@@ -1,3 +1,5 @@
+import { getLikedMovies } from "../API/getLikedMovies.mjs";
+
 const likedMoviesList = () => {
   const item = JSON.parse(localStorage.getItem("results"));
   let movies;
@@ -16,7 +18,7 @@ const likeMovie = (movie) => {
 
   if (likedMovies[movie.id]) {
     likedMovies[movie.id] = undefined;
-    
+
     console.log("ya estaba, elimina we");
   } else {
     likedMovies[movie.id] = movie;
@@ -29,6 +31,8 @@ const likeMovie = (movie) => {
     JSON.stringify(likedMovies)
   );
   console.log(likedMovies, "xdxd");
+
+  getLikedMovies();
 };
 
 export { likeMovie, likedMoviesList };
