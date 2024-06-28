@@ -1,5 +1,9 @@
 import { preview } from "../nodes.mjs";
 import { test } from "./lazy-loader.mjs";
+import {
+  likeMovie,
+  likedMoviesList,
+} from "./like-movie.mjs";
 
 const createMovies = (
   data,
@@ -10,12 +14,15 @@ const createMovies = (
     preview.innerHTML = "";
   }
 
-  data.results.map((movie) => {
+  console.log(data);
+
+  data.results?.map((movie) => {
     const container = document.createElement("div");
     container.classList.add("movie-container");
-    container.addEventListener("click", () => {
-      location.hash = `#movie=${movie.id}`;
-    });
+    //ver
+    // container.addEventListener("click", () => {
+    //   location.hash = `#movie=${movie.id}`;
+    // });
 
     const img = document.createElement("img");
     img.classList.add("movie-img");
@@ -28,6 +35,22 @@ const createMovies = (
     /* img.addEventListener("error", () => {
       img.setAttribute("src", "../img/default.png");
     }); */
+    img.addEventListener("click", () => {
+      location.hash = `#movie=${movie.id}`;
+    });
+
+    const movieBtn = document.createElement("button");
+    movieBtn.classList.add("movie-btn");
+
+    likedMoviesList()[movie.id] &&
+      movieBtn.classList.add("movie-btn--liked");
+
+    movieBtn.addEventListener("click", (/* e */) => {
+      // e.stopPropagation()
+      movieBtn.classList.toggle("movie-btn--liked");
+
+      likeMovie(movie);
+    });
 
     if (lazyLoad) {
       test(img);
@@ -37,7 +60,7 @@ const createMovies = (
     img.loading = "lazy";
     // img.setAttribute("loading", "lazy");
 
-    container.append(img);
+    container.append(img, movieBtn);
     preview.append(container);
   });
 };

@@ -1,5 +1,6 @@
 import { getByCategory } from "./API/get-by-category.mjs";
 import { getSearch } from "./API/get-search.mjs";
+import { getLikedMovies } from "./API/getLikedMovies.mjs";
 import {
   paginationData,
   paginationDataCategory,
@@ -18,6 +19,7 @@ import {
   headerCategoryTitle,
   headerSection,
   headerTitle,
+  likedMoviesSection,
   movieDetailSection,
   searchForm,
   searchFormBtn,
@@ -121,12 +123,15 @@ const homePage = () => {
   searchForm.classList.remove("inactive");
 
   trendingPreviewSection.classList.remove("inactive");
+  
   categoriesPreviewSection.classList.remove("inactive");
+  likedMoviesSection.classList.remove("inactive");
   genericSection.classList.add("inactive");
   movieDetailSection.classList.add("inactive");
 
   showTrendingMovies();
   showCategories();
+  getLikedMovies();
 };
 
 const categoriesPage = () => {
@@ -148,6 +153,7 @@ const categoriesPage = () => {
 
   trendingPreviewSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
+  likedMoviesSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
 
@@ -175,6 +181,7 @@ const moviesPage = () => {
 
   trendingPreviewSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
+  likedMoviesSection.classList.add("inactive");
   genericSection.classList.add("inactive");
   movieDetailSection.classList.remove("inactive");
 
@@ -196,6 +203,7 @@ const searchPage = () => {
 
   trendingPreviewSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
+  likedMoviesSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
 
@@ -224,6 +232,7 @@ const trendsPage = () => {
 
   trendingPreviewSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
+  likedMoviesSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
 

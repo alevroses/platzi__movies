@@ -1,20 +1,19 @@
 // Sections
-const headerSection =
-  document.querySelector("#header");
-const trendingPreviewSection =
-  document.querySelector("#trendingPreview");
-const categoriesPreviewSection =
-  document.querySelector("#categoriesPreview");
-const genericSection = document.querySelector(
-  "#genericList"
+const headerSection = document.querySelector("#header");
+const trendingPreviewSection = document.querySelector(
+  "#trendingPreview"
 );
-const movieDetailSection = document.querySelector(
-  "#movieDetail"
+const categoriesPreviewSection = document.querySelector(
+  "#categoriesPreview"
 );
+const genericSection =
+  document.querySelector("#genericList");
+const movieDetailSection =
+  document.querySelector("#movieDetail");
+const likedMoviesSection = document.querySelector("#liked");
 
 // Lists & Containers
-const searchForm =
-  document.querySelector("#searchForm");
+const searchForm = document.querySelector("#searchForm");
 
 // preview : trendingMoviesPreviewList
 const preview = document.querySelector(
@@ -25,22 +24,20 @@ const preview = document.querySelector(
 const previewCat = document.querySelector(
   ".categoriesPreview-list"
 );
-const movieDetailCategoriesList =
-  document.querySelector(
-    "#movieDetail .categories-list"
-  );
-const relatedMoviesContainer =
-  document.querySelector(
-    ".relatedMovies-scrollContainer"
-  );
+const movieDetailCategoriesList = document.querySelector(
+  "#movieDetail .categories-list"
+);
+const relatedMoviesContainer = document.querySelector(
+  ".relatedMovies-scrollContainer"
+);
+
+const likedMoviesListArticle = document.querySelector(
+  ".liked-movieList"
+);
 
 // Elements
-const headerTitle = document.querySelector(
-  ".header-title"
-);
-const arrowBtn = document.querySelector(
-  ".header-arrow"
-);
+const headerTitle = document.querySelector(".header-title");
+const arrowBtn = document.querySelector(".header-arrow");
 const headerCategoryTitle = document.querySelector(
   ".header-title--categoryView"
 );
@@ -51,8 +48,7 @@ const searchFormInput = document.querySelector(
 );
 
 //xd
-const searchFormBtn =
-  document.querySelector("#searchBtn");
+const searchFormBtn = document.querySelector("#searchBtn");
 
 const trendingBtn = document.querySelector(
   ".trendingPreview-btn"
@@ -61,10 +57,9 @@ const trendingBtn = document.querySelector(
 const movieDetailTitle = document.querySelector(
   ".movieDetail-title"
 );
-const movieDetailDescription =
-  document.querySelector(
-    ".movieDetail-description"
-  );
+const movieDetailDescription = document.querySelector(
+  ".movieDetail-description"
+);
 const movieDetailScore = document.querySelector(
   ".movieDetail-score"
 );
@@ -89,4 +84,6 @@ export {
   movieDetailTitle,
   movieDetailDescription,
   movieDetailScore,
+  likedMoviesListArticle,
+  likedMoviesSection,
 };
